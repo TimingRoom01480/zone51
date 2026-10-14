@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "zone51:ancient_altar",
+    "zone51:radioactive_waste",
+    "zone51:keycard_door"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "Костюм Древнего Человека",
+  "background": "minecraft:textures/block/gray_concrete.png",
+  "icon": "zone51:ancient_man_chestplate",
+  "abilities": {
+    "bonus": {
+      "type": "palladium:attribute_modifier",
+      "attribute": "minecraft:generic.max_health",
+      "amount": 4.0,
+      "operation": 0,
+      "uuid": "7f3c1d2e-0000-4000-8000-0000000000a5"
+    }
+  }
+}

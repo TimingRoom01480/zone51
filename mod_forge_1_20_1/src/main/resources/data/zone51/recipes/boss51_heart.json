@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "zone51:boss51_core"
+    },
+    {
+      "item": "zone51:energy_shard"
+    },
+    {
+      "item": "zone51:energy_shard"
+    },
+    {
+      "item": "minecraft:netherite_block"
+    }
+  ],
+  "result": {
+    "item": "zone51:boss51_heart"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "Лабораторный костюм",
+  "background": "minecraft:textures/block/gray_concrete.png",
+  "icon": "zone51:lab_chestplate",
+  "abilities": {
+    "bonus": {
+      "type": "palladium:attribute_modifier",
+      "attribute": "minecraft:generic.luck",
+      "amount": 1.0,
+      "operation": 0,
+      "uuid": "7f3c1d2e-0000-4000-8000-0000000000a2"
+    }
+  }
+}

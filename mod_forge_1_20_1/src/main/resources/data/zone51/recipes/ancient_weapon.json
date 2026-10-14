@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "zone51:ancient_handle"
+    },
+    {
+      "item": "zone51:ancient_blade"
+    },
+    {
+      "item": "zone51:ancient_guard"
+    },
+    {
+      "item": "zone51:ancient_pommel"
+    },
+    {
+      "item": "zone51:ancient_crystal"
+    },
+    {
+      "item": "zone51:stone_core"
+    }
+  ],
+  "result": {
+    "item": "zone51:ancient_weapon_sword"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "create"
+    }
+  ],
+  "type": "create:compacting",
+  "ingredients": [
+    {
+      "item": "zone51:energy_shard"
+    },
+    {
+      "item": "zone51:energy_shard"
+    },
+    {
+      "item": "zone51:energy_shard"
+    },
+    {
+      "item": "minecraft:iron_ingot"
+    }
+  ],
+  "results": [
+    {
+      "item": "zone51:lightning_crystal"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:jigsaw",
+  "biomes": "#zone51:has_zone51",
+  "step": "surface_structures",
+  "spawn_overrides": {},
+  "terrain_adaptation": "beard_thin",
+  "start_pool": "zone51:zone51/start",
+  "size": 1,
+  "start_height": {
+    "absolute": -3
+  },
+  "max_distance_from_center": 80,
+  "use_expansion_hack": false,
+  "project_start_to_heightmap": "WORLD_SURFACE_WG"
+}
