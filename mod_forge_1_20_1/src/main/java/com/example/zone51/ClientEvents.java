@@ -31,6 +31,8 @@ public class ClientEvents {
     @SubscribeEvent
     public static void layers(EntityRenderersEvent.RegisterLayerDefinitions e) {
         e.registerLayerDefinition(Boss51Model.LAYER, Boss51Model::createBodyLayer);
+        e.registerLayerDefinition(SuitModels.ANCIENT, SuitModels::ancient);
+        e.registerLayerDefinition(SuitModels.CARDSHARP, SuitModels::cardsharp);
         e.registerLayerDefinition(MobModels.STONE, MobModels::stone);
         e.registerLayerDefinition(MobModels.CRYSTAL, MobModels::crystal);
         e.registerLayerDefinition(MobModels.CARDSHARP, MobModels::cardsharp);

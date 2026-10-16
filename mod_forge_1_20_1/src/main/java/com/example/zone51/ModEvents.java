@@ -1,6 +1,9 @@
 package com.example.zone51;
 
 import com.mojang.brigadier.Command;
+import com.mojang.brigadier.arguments.StringArgumentType;
+import com.mojang.brigadier.builder.LiteralArgumentBuilder;
+import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
@@ -183,10 +186,30 @@ public class ModEvents {
     /** /zone51 grant: выдать себе Древнюю Силу (для теста, нужен оп). */
     @SubscribeEvent
     public static void onCommands(RegisterCommandsEvent e) {
-        e.getDispatcher().register(Commands.literal("zone51").requires(s -> s.hasPermission(2))
-                .then(Commands.literal("grant").executes(c -> {
-                    AncientPower.grant(c.getSource().getPlayerOrException());
+        LiteralArgumentBuilder<CommandSourceStack> root = Commands.literal("zone51");
+        root.then(Commands.literal("grant").requires(s -> s.hasPermission(2)).executes(c -> {
+            AncientPower.grant(c.getSource().getPlayerOrException());
+            return Command.SINGLE_SUCCESS;
+        }));
+        // команды, которые вызывают способности Palladium (значки справа внизу)
+        root.then(Commands.literal("ability").then(Commands.argument("name", StringArgumentType.word()).executes(c -> {
+            AncientPower.Ability a = AncientPower.fromName(StringArgumentType.getString(c, "name"));
+            if (a != null) AncientPower.useAbility(c.getSource().getPlayerOrException(), a);
+            return Command.SINGLE_SUCCESS;
+        })));
+        root.then(Commands.literal("suit").executes(c -> {
+            Suits.suitAbility(c.getSource().getPlayerOrException());
+            return Command.SINGLE_SUCCESS;
+        }));
+        root.then(Commands.literal("flight")
+                .then(Commands.literal("on").executes(c -> {
+                    AncientPower.setFlight(c.getSource().getPlayerOrException(), true);
+                    return Command.SINGLE_SUCCESS;
+                }))
+                .then(Commands.literal("off").executes(c -> {
+                    AncientPower.setFlight(c.getSource().getPlayerOrException(), false);
                     return Command.SINGLE_SUCCESS;
                 })));
+        e.getDispatcher().register(root);
     }
 }

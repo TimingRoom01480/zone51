@@ -11,9 +11,9 @@ import org.lwjgl.glfw.GLFW;
 @Mod.EventBusSubscriber(modid = Zone51.MODID, value = Dist.CLIENT)
 public class ClientKeys {
     public static final String CATEGORY = "key.categories.zone51";
-    public static final KeyMapping NEXT = new KeyMapping("key.zone51.next_ability", GLFW.GLFW_KEY_V, CATEGORY);
+    public static final KeyMapping NEXT = new KeyMapping("key.zone51.next_ability", GLFW.GLFW_KEY_H, CATEGORY);
     public static final KeyMapping USE = new KeyMapping("key.zone51.use_ability", GLFW.GLFW_KEY_R, CATEGORY);
-    public static final KeyMapping SUIT = new KeyMapping("key.zone51.suit_ability", GLFW.GLFW_KEY_X, CATEGORY);
+    public static final KeyMapping SUIT = new KeyMapping("key.zone51.suit_ability", GLFW.GLFW_KEY_G, CATEGORY);
 
     @SubscribeEvent
     public static void onTick(TickEvent.ClientTickEvent e) {

@@ -15,8 +15,8 @@ import net.minecraftforge.items.ItemHandlerHelper;
 public final class AncientPower {
     public static final String HAS = "zone51_ap", ENERGY = "zone51_ap_energy", SEL = "zone51_ap_sel",
             CURSE = "zone51_ap_curse", STONE = "zone51_stone_defeated", FLY = "zone51_ap_fly",
-            STRIKE = "zone51_ap_strike", CD = "zone51_ap_cd", SHIELD_CD = "zone51_shield_cd";
-    public static final String[] KEEP = {HAS, ENERGY, SEL, STONE, "zone51_tree_flight", "zone51_tree_attack", "zone51_tree_defense"};
+            STRIKE = "zone51_ap_strike", CD = "zone51_ap_cd", SHIELD_CD = "zone51_shield_cd", OFF = "zone51_ap_off";
+    public static final String[] KEEP = {HAS, OFF, ENERGY, SEL, STONE, "zone51_tree_flight", "zone51_tree_attack", "zone51_tree_defense"};
     public static final int MAX = 100;
 
     public enum Ability {
@@ -26,7 +26,29 @@ public final class AncientPower {
         public Component label() { return Component.translatable("ability.zone51." + name().toLowerCase()); }
     }
 
-    public static boolean has(Player p) { return p.getPersistentData().getBoolean(HAS); }
+    /** Сила выдана и сейчас включена (её можно выключать и включать у алтаря сколько угодно раз). */
+    public static boolean has(Player p) {
+        CompoundTag d = p.getPersistentData();
+        return d.getBoolean(HAS) && !d.getBoolean(OFF);
+    }
+
+    public static Ability fromName(String n) {
+        for (Ability a : Ability.values()) if (a.name().equalsIgnoreCase(n)) return a;
+        return null;
+    }
+
+    public static void setFlight(ServerPlayer p, boolean on) {
+        if (!has(p)) return;
+        if (p.getPersistentData().getBoolean(FLY) != on) toggleFlight(p);
+    }
+
+    /** Если установлен Palladium: выдаём или забираем его способность «Древняя Сила» (значки справа внизу). */
+    public static void syncPalladium(ServerPlayer p) {
+        if (!net.minecraftforge.fml.ModList.get().isLoaded("palladium") || p.getServer() == null) return;
+        var server = p.getServer();
+        String cmd = "execute as " + p.getUUID() + " run superpower " + (has(p) ? "add" : "remove") + " zone51:ancient_power";
+        server.getCommands().performPrefixedCommand(server.createCommandSourceStack().withSuppressedOutput(), cmd);
+    }
 
     public static int energy(Player p) {
         CompoundTag t = p.getPersistentData();
@@ -46,18 +68,35 @@ public final class AncientPower {
 
     public static void grant(ServerPlayer p) {
         p.getPersistentData().putBoolean(HAS, true);
+        p.getPersistentData().putBoolean(OFF, false);
         setEnergy(p, MAX);
+        syncPalladium(p);
         msg(p, Component.translatable("message.zone51.power_granted"));
     }
 
+    /**
+     * Алтарь работает бесконечно:
+     * ПКМ = полная перезарядка и снятие проклятия;
+     * Shift+ПКМ пустой рукой = включить/выключить Древнюю Силу;
+     * Shift+ПКМ с Каменным ядром = прокачать ветку выбранной способности (ядро не тратится).
+     */
     public static void altar(ServerPlayer p) {
-        if (!has(p)) {
-            if (p.getPersistentData().getBoolean(STONE)) grant(p);
+        CompoundTag d = p.getPersistentData();
+        if (!d.getBoolean(HAS)) {
+            if (d.getBoolean(STONE)) grant(p);
             else msg(p, Component.translatable("message.zone51.altar_silent"));
             return;
         }
-        if (p.isShiftKeyDown()) { upgrade(p); return; }
-        p.getPersistentData().putInt(CURSE, 0);
+        if (p.isShiftKeyDown()) {
+            if (p.getMainHandItem().is(ModItems.STONE_CORE.get())) { upgrade(p); return; }
+            boolean off = !d.getBoolean(OFF);
+            d.putBoolean(OFF, off);
+            if (off) disableFlight(p);
+            syncPalladium(p);
+            msg(p, Component.translatable(off ? "message.zone51.power_off" : "message.zone51.power_on"));
+            return;
+        }
+        d.putInt(CURSE, 0);
         setEnergy(p, MAX);
         msg(p, Component.translatable("message.zone51.altar_recharged"));
     }
@@ -113,13 +152,16 @@ public final class AncientPower {
     }
 
     public static void use(ServerPlayer p) {
+        useAbility(p, selected(p));
+    }
+
+    public static void useAbility(ServerPlayer p, Ability a) {
         if (!has(p)) { msg(p, Component.translatable("message.zone51.no_power")); return; }
         long t = p.level().getGameTime();
         CompoundTag d = p.getPersistentData();
         if (t < d.getLong(CD)) return;
         d.putLong(CD, t + 8);
 
-        Ability a = selected(p);
         boolean staff = holdingStaff(p);
         if (a == Ability.FLIGHT) { toggleFlight(p); return; }
 
@@ -157,6 +199,7 @@ public final class AncientPower {
     }
 
     public static void tick(ServerPlayer p, long t) {
+        if (t % 100 == 0 && p.getPersistentData().getBoolean(HAS)) syncPalladium(p);
         if (t % 20 != 0 || !has(p)) return;
         CompoundTag d = p.getPersistentData();
         if (energy(p) < MAX) setEnergy(p, energy(p) + 2);

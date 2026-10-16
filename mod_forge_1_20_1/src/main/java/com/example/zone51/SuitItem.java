@@ -8,7 +8,10 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
+import net.minecraftforge.client.extensions.common.IClientItemExtensions;
+
 import java.util.List;
+import java.util.function.Consumer;
 
 public class SuitItem extends ArmorItem {
     public final SuitType suit;
@@ -23,6 +26,13 @@ public class SuitItem extends ArmorItem {
         if (suit.energy && getType() == Type.CHESTPLATE) {
             tip.add(Component.translatable("tooltip.zone51.energy", Energy.get(stack), Suits.MAX_ENERGY)
                     .withStyle(ChatFormatting.AQUA));
+        }
+    }
+
+    @Override
+    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
+        if (suit == SuitType.ANCIENT || suit == SuitType.CARDSHARP) {
+            consumer.accept(SuitClient.create(suit));
         }
     }
 }
