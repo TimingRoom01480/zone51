@@ -82,8 +82,8 @@
   "message.zone51.heart_power": "Heart of BOSS51: %s (energy %s)",
   "message.zone51.no_suit_ability": "You need a suit with an ability (Exoskeleton, Ancient Man or Cardsharp)",
   "key.categories.zone51": "Ancient Power: Zone 51",
-  "key.zone51.next_ability": "Next ability",
-  "key.zone51.use_ability": "Use ability",
+  "key.zone51.next_ability": "Next ability (Ancient Power)",
+  "key.zone51.use_ability": "Use ability (Ancient Power)",
   "key.zone51.suit_ability": "Suit ability",
   "ability.zone51.flight": "Flight",
   "ability.zone51.fireball": "Fireball",
@@ -122,5 +122,7 @@
   "message.zone51.tree_xp": "Requires 3 experience levels",
   "tree.zone51.flight": "Flight",
   "tree.zone51.attack": "Attack",
-  "tree.zone51.defense": "Defense"
+  "tree.zone51.defense": "Defense",
+  "message.zone51.power_on": "Ancient Power enabled",
+  "message.zone51.power_off": "Ancient Power disabled (enable: Shift+Use on the altar)"
 }

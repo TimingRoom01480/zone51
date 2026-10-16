@@ -82,8 +82,8 @@
   "message.zone51.heart_power": "Сердце БОСС51: %s (энергия %s)",
   "message.zone51.no_suit_ability": "Нужен костюм со способностью (Экзоскелет, Древний Человек или Карточник)",
   "key.categories.zone51": "Ancient Power: Zone 51",
-  "key.zone51.next_ability": "Следующая способность",
-  "key.zone51.use_ability": "Применить способность",
+  "key.zone51.next_ability": "Следующая способность (Древняя Сила)",
+  "key.zone51.use_ability": "Применить способность (Древняя Сила)",
   "key.zone51.suit_ability": "Способность костюма",
   "ability.zone51.flight": "Полёт",
   "ability.zone51.fireball": "Фаербол",
@@ -122,5 +122,7 @@
   "message.zone51.tree_xp": "Нужно 3 уровня опыта",
   "tree.zone51.flight": "Полёт",
   "tree.zone51.attack": "Атака",
-  "tree.zone51.defense": "Защита"
+  "tree.zone51.defense": "Защита",
+  "message.zone51.power_on": "Древняя Сила включена",
+  "message.zone51.power_off": "Древняя Сила выключена (включить: Shift+ПКМ по алтарю)"
 }
