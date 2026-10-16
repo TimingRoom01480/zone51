@@ -9,6 +9,30 @@
       "amount": 4.0,
       "operation": 0,
       "uuid": "7f3c1d2e-0000-4000-8000-0000000000a5"
+    },
+    "suit_ability": {
+      "type": "palladium:command",
+      "icon": "minecraft:ender_eye",
+      "title": "Энергетический рывок",
+      "bar_color": "white",
+      "hidden": true,
+      "hidden_in_bar": false,
+      "list_index": 0,
+      "first_tick_commands": [
+        "zone51 suit"
+      ],
+      "conditions": {
+        "enabling": [
+          {
+            "type": "palladium:activation",
+            "cooldown": 40,
+            "ticks": 10,
+            "key_type": "key_bind",
+            "needs_empty_hand": false,
+            "allow_scrolling_when_crouching": true
+          }
+        ]
+      }
     }
   }
 }

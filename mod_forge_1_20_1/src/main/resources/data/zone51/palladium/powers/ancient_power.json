@@ -1,0 +1,284 @@
+{
+  "name": "Древняя Сила",
+  "background": "minecraft:textures/block/gray_concrete.png",
+  "icon": "zone51:ancient_staff",
+  "abilities": {
+    "fireball": {
+      "type": "palladium:command",
+      "icon": "minecraft:fire_charge",
+      "title": "Фаербол",
+      "bar_color": "red",
+      "hidden": true,
+      "hidden_in_bar": false,
+      "list_index": 0,
+      "first_tick_commands": [
+        "zone51 ability fireball"
+      ],
+      "conditions": {
+        "enabling": [
+          {
+            "type": "palladium:activation",
+            "cooldown": 10,
+            "ticks": 12,
+            "key_type": "key_bind",
+            "needs_empty_hand": false,
+            "allow_scrolling_when_crouching": true
+          }
+        ]
+      }
+    },
+    "shield": {
+      "type": "palladium:command",
+      "icon": "minecraft:shield",
+      "title": "Энергощит",
+      "bar_color": "light_blue",
+      "hidden": true,
+      "hidden_in_bar": false,
+      "list_index": 0,
+      "first_tick_commands": [
+        "zone51 ability shield"
+      ],
+      "conditions": {
+        "enabling": [
+          {
+            "type": "palladium:activation",
+            "cooldown": 60,
+            "ticks": 20,
+            "key_type": "key_bind",
+            "needs_empty_hand": false,
+            "allow_scrolling_when_crouching": true
+          }
+        ]
+      }
+    },
+    "teleport": {
+      "type": "palladium:command",
+      "icon": "minecraft:ender_pearl",
+      "title": "Телепортация",
+      "bar_color": "purple",
+      "hidden": true,
+      "hidden_in_bar": false,
+      "list_index": 0,
+      "first_tick_commands": [
+        "zone51 ability teleport"
+      ],
+      "conditions": {
+        "enabling": [
+          {
+            "type": "palladium:activation",
+            "cooldown": 30,
+            "ticks": 8,
+            "key_type": "key_bind",
+            "needs_empty_hand": false,
+            "allow_scrolling_when_crouching": true
+          }
+        ]
+      }
+    },
+    "strike": {
+      "type": "palladium:command",
+      "icon": "zone51:ancient_weapon_sword",
+      "title": "Удар энергией",
+      "bar_color": "yellow",
+      "hidden": true,
+      "hidden_in_bar": false,
+      "list_index": 0,
+      "first_tick_commands": [
+        "zone51 ability strike"
+      ],
+      "conditions": {
+        "enabling": [
+          {
+            "type": "palladium:activation",
+            "cooldown": 40,
+            "ticks": 12,
+            "key_type": "key_bind",
+            "needs_empty_hand": false,
+            "allow_scrolling_when_crouching": true
+          }
+        ]
+      }
+    },
+    "flight": {
+      "type": "palladium:command",
+      "icon": "minecraft:feather",
+      "title": "Полёт",
+      "bar_color": "white",
+      "hidden": true,
+      "hidden_in_bar": false,
+      "list_index": 0,
+      "first_tick_commands": [
+        "zone51 flight on"
+      ],
+      "last_tick_commands": [
+        "zone51 flight off"
+      ],
+      "conditions": {
+        "enabling": [
+          {
+            "type": "palladium:toggle",
+            "cooldown": 0,
+            "key_type": "key_bind",
+            "needs_empty_hand": false
+          }
+        ]
+      }
+    },
+    "storm": {
+      "type": "palladium:command",
+      "icon": "minecraft:trident",
+      "title": "Энергетический шторм",
+      "bar_color": "yellow",
+      "hidden": true,
+      "hidden_in_bar": false,
+      "list_index": 1,
+      "first_tick_commands": [
+        "zone51 ability storm"
+      ],
+      "conditions": {
+        "enabling": [
+          {
+            "type": "palladium:activation",
+            "cooldown": 100,
+            "ticks": 20,
+            "key_type": "key_bind",
+            "needs_empty_hand": false,
+            "allow_scrolling_when_crouching": true
+          }
+        ]
+      }
+    },
+    "explosion": {
+      "type": "palladium:command",
+      "icon": "minecraft:tnt",
+      "title": "Энергетический взрыв",
+      "bar_color": "orange",
+      "hidden": true,
+      "hidden_in_bar": false,
+      "list_index": 1,
+      "first_tick_commands": [
+        "zone51 ability explosion"
+      ],
+      "conditions": {
+        "enabling": [
+          {
+            "type": "palladium:activation",
+            "cooldown": 80,
+            "ticks": 16,
+            "key_type": "key_bind",
+            "needs_empty_hand": false,
+            "allow_scrolling_when_crouching": true
+          }
+        ]
+      }
+    },
+    "sword": {
+      "type": "palladium:command",
+      "icon": "zone51:energy_sword",
+      "title": "Энергетический меч",
+      "bar_color": "cyan",
+      "hidden": true,
+      "hidden_in_bar": false,
+      "list_index": 1,
+      "first_tick_commands": [
+        "zone51 ability sword"
+      ],
+      "conditions": {
+        "enabling": [
+          {
+            "type": "palladium:activation",
+            "cooldown": 120,
+            "ticks": 10,
+            "key_type": "key_bind",
+            "needs_empty_hand": false,
+            "allow_scrolling_when_crouching": true
+          }
+        ]
+      }
+    },
+    "heal": {
+      "type": "palladium:command",
+      "icon": "minecraft:golden_apple",
+      "title": "Лечение энергией",
+      "bar_color": "green",
+      "hidden": true,
+      "hidden_in_bar": false,
+      "list_index": 1,
+      "first_tick_commands": [
+        "zone51 ability heal"
+      ],
+      "conditions": {
+        "enabling": [
+          {
+            "type": "palladium:activation",
+            "cooldown": 100,
+            "ticks": 10,
+            "key_type": "key_bind",
+            "needs_empty_hand": false,
+            "allow_scrolling_when_crouching": true
+          }
+        ]
+      }
+    },
+    "aim_fireball": {
+      "type": "palladium:aim",
+      "hidden": true,
+      "hidden_in_bar": true,
+      "conditions": {
+        "enabling": [
+          {
+            "type": "palladium:or",
+            "conditions": [
+              {
+                "type": "palladium:ability_enabled",
+                "power": "zone51:ancient_power",
+                "ability": "fireball"
+              },
+              {
+                "type": "palladium:ability_enabled",
+                "power": "zone51:ancient_power",
+                "ability": "strike"
+              }
+            ]
+          }
+        ]
+      },
+      "time": 2,
+      "arm": "main_arm"
+    },
+    "arms_cast": {
+      "type": "palladium:show_both_arms",
+      "hidden": true,
+      "hidden_in_bar": true,
+      "conditions": {
+        "enabling": [
+          {
+            "type": "palladium:or",
+            "conditions": [
+              {
+                "type": "palladium:ability_enabled",
+                "power": "zone51:ancient_power",
+                "ability": "storm"
+              },
+              {
+                "type": "palladium:ability_enabled",
+                "power": "zone51:ancient_power",
+                "ability": "explosion"
+              },
+              {
+                "type": "palladium:ability_enabled",
+                "power": "zone51:ancient_power",
+                "ability": "heal"
+              },
+              {
+                "type": "palladium:ability_enabled",
+                "power": "zone51:ancient_power",
+                "ability": "shield"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

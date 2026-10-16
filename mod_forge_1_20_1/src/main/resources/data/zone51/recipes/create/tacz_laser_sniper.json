@@ -1,0 +1,53 @@
+{
+  "conditions": [
+    {
+      "type": "forge:and",
+      "values": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "create"
+        },
+        {
+          "type": "forge:mod_loaded",
+          "modid": "tacz"
+        }
+      ]
+    }
+  ],
+  "type": "create:mechanical_crafting",
+  "acceptMirrored": false,
+  "pattern": [
+    "IEEEEI",
+    "ERLLGE",
+    "  IBI "
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "E": {
+      "item": "zone51:energy_shard"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "G": {
+      "item": "minecraft:gold_ingot"
+    },
+    "L": {
+      "item": "zone51:lightning_crystal"
+    },
+    "B": {
+      "item": "zone51:boss51_core"
+    }
+  },
+  "result": {
+    "item": "tacz:modern_kinetic_gun",
+    "nbt": {
+      "GunId": "zone51:laser_sniper",
+      "GunFireMode": "SEMI",
+      "GunCurrentAmmoCount": 0,
+      "HasBulletInBarrel": 0
+    }
+  }
+}
