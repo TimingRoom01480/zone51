@@ -1,0 +1,52 @@
+[
+  {
+    "body_part": "chest",
+    "amount": 2,
+    "offset": [
+      1,
+      -4,
+      1
+    ],
+    "offset_random": [
+      3,
+      2,
+      3
+    ],
+    "motion": [
+      0.1,
+      0.8,
+      0.1
+    ],
+    "motion_random": [
+      0.25,
+      0.2,
+      0.25
+    ],
+    "visible_in_first_person": false
+  },
+  {
+    "body_part": "chest",
+    "amount": 2,
+    "offset": [
+      -1,
+      -8,
+      -1
+    ],
+    "offset_random": [
+      -3,
+      -2,
+      -3
+    ],
+    "motion": [
+      0.1,
+      0.8,
+      0.1
+    ],
+    "motion_random": [
+      0.25,
+      0.2,
+      0.25
+    ],
+    "visible_in_first_person": false
+  }
+]

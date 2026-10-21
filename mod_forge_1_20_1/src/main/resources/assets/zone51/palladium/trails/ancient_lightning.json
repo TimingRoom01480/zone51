@@ -1,0 +1,15 @@
+{
+  "type": "palladium:lightning",
+  "glow_color": {
+    "type": "palladium:integer_property",
+    "property": "zone51_trail_glow",
+    "fallback": 255
+  },
+  "spacing": 1,
+  "lifetime": 6,
+  "amount": 4,
+  "spread_x": 0.5,
+  "spread_y": 0.25,
+  "thickness": 0.003,
+  "normal_transparency": true
+}

@@ -1,0 +1,29 @@
+{
+  "type": "palladium:compound",
+  "layers": [
+    {
+      "type": "palladium:thrusters",
+      "right_arm": false,
+      "left_arm": false,
+      "right_leg": true,
+      "left_leg": true,
+      "color": [
+        {
+          "type": "palladium:integer_property",
+          "property": "zone51_thr_r",
+          "fallback": 255
+        },
+        {
+          "type": "palladium:integer_property",
+          "property": "zone51_thr_g",
+          "fallback": 150
+        },
+        {
+          "type": "palladium:integer_property",
+          "property": "zone51_thr_b",
+          "fallback": 40
+        }
+      ]
+    }
+  ]
+}

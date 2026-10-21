@@ -1,0 +1,52 @@
+[
+  {
+    "body_part": "right_leg",
+    "amount": 3,
+    "offset": [
+      0,
+      -1,
+      0
+    ],
+    "offset_random": [
+      1,
+      0.5,
+      1
+    ],
+    "motion": [
+      0,
+      -0.6,
+      0
+    ],
+    "motion_random": [
+      0.1,
+      0.1,
+      0.1
+    ],
+    "visible_in_first_person": false
+  },
+  {
+    "body_part": "left_leg",
+    "amount": 3,
+    "offset": [
+      0,
+      -1,
+      0
+    ],
+    "offset_random": [
+      1,
+      0.5,
+      1
+    ],
+    "motion": [
+      0,
+      -0.6,
+      0
+    ],
+    "motion_random": [
+      0.1,
+      0.1,
+      0.1
+    ],
+    "visible_in_first_person": false
+  }
+]
