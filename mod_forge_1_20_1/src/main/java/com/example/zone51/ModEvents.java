@@ -44,6 +44,8 @@ public class ModEvents {
         AncientPower.tick(p, t);
         AncientParts.tick(p, t);
         Suits.tickFast(p, t);
+        AncientArts.tickFast(p, t);
+        EnergySync.tick(p, t);
         if (t % 10 == 0) Suits.tick(p, t);
         if (t % 20 == 0) { // временные предметы (энергетический меч) исчезают
             Inventory inv = p.getInventory();
@@ -107,10 +109,15 @@ public class ModEvents {
     @SubscribeEvent
     public static void onLivingTick(LivingEvent.LivingTickEvent e) {
         LivingEntity en = e.getEntity();
-        if (en instanceof Wolf && !en.level().isClientSide && en.tickCount % 20 == 0) {
+        if ((en instanceof Wolf || en instanceof net.minecraft.world.entity.animal.IronGolem) && !en.level().isClientSide && en.tickCount % 20 == 0) {
             CompoundTag t = en.getPersistentData();
             if (t.contains("zone51_expire") && en.level().getGameTime() >= t.getLong("zone51_expire")) en.discard();
         }
+    }
+
+    @SubscribeEvent
+    public static void onLogin(PlayerEvent.PlayerLoggedInEvent e) {
+        if (e.getEntity() instanceof ServerPlayer p) Skills.sync(p, false);
     }
 
     /** Древняя Сила сохраняется после смерти. */
@@ -121,6 +128,9 @@ public class ModEvents {
         CompoundTag n = e.getEntity().getPersistentData();
         for (String k : AncientPower.KEEP) {
             if (o.contains(k)) n.put(k, o.get(k).copy());
+        }
+        for (String k : o.getAllKeys()) {
+            if (k.startsWith(Skills.PREFIX)) n.put(k, o.get(k).copy());
         }
     }
 
@@ -210,6 +220,21 @@ public class ModEvents {
                     AncientPower.setFlight(c.getSource().getPlayerOrException(), false);
                     return Command.SINGLE_SUCCESS;
                 })));
+        root.then(Commands.literal("suitability").then(Commands.argument("name", StringArgumentType.word()).executes(c -> {
+            SuitArts.cast(c.getSource().getPlayerOrException(), SuitAbility.byId(StringArgumentType.getString(c, "name")));
+            return Command.SINGLE_SUCCESS;
+        })));
+        root.then(Commands.literal("heart").then(Commands.argument("name", StringArgumentType.word()).executes(c -> {
+            ServerPlayer pl = c.getSource().getPlayerOrException();
+            Boss51HeartItem.Power pw = Boss51HeartItem.byId(StringArgumentType.getString(c, "name"));
+            ItemStack held = pl.getMainHandItem();
+            if (pw != null && held.getItem() instanceof Boss51HeartItem) Boss51HeartItem.perform(pl, held, pw);
+            return Command.SINGLE_SUCCESS;
+        })));
+        root.then(Commands.literal("tree").executes(c -> {
+            Skills.sync(c.getSource().getPlayerOrException(), true);
+            return Command.SINGLE_SUCCESS;
+        }));
         e.getDispatcher().register(root);
     }
 }

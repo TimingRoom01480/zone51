@@ -4,7 +4,9 @@ import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
+import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -32,6 +34,10 @@ public class ClientEvents {
     public static void layers(EntityRenderersEvent.RegisterLayerDefinitions e) {
         e.registerLayerDefinition(Boss51Model.LAYER, Boss51Model::createBodyLayer);
         e.registerLayerDefinition(SuitModels.ANCIENT, SuitModels::ancient);
+        e.registerLayerDefinition(SuitModels2.GUARD, SuitModels2::guard);
+        e.registerLayerDefinition(SuitModels2.LAB, SuitModels2::lab);
+        e.registerLayerDefinition(SuitModels2.EXO, SuitModels2::exo);
+        e.registerLayerDefinition(SuitModels2.MUTANT, SuitModels2::mutant);
         e.registerLayerDefinition(SuitModels.CARDSHARP, SuitModels::cardsharp);
         e.registerLayerDefinition(MobModels.STONE, MobModels::stone);
         e.registerLayerDefinition(MobModels.CRYSTAL, MobModels::crystal);
@@ -39,9 +45,16 @@ public class ClientEvents {
     }
 
     @SubscribeEvent
+    public static void overlays(RegisterGuiOverlaysEvent e) {
+        e.registerAbove(VanillaGuiOverlay.HOTBAR.id(), "energy", EnergyHud.OVERLAY);
+    }
+
+    @SubscribeEvent
     public static void keys(RegisterKeyMappingsEvent e) {
         e.register(ClientKeys.NEXT);
         e.register(ClientKeys.USE);
         e.register(ClientKeys.SUIT);
+        e.register(ClientKeys.SUIT_NEXT);
+        e.register(ClientKeys.TREE);
     }
 }

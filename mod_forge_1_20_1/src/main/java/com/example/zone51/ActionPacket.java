@@ -25,6 +25,8 @@ public class ActionPacket {
                 case 1 -> AncientPower.use(p);
                 case 2 -> Suits.suitAbility(p);
                 case 3 -> CardItem.throwFrom(p, net.minecraft.world.InteractionHand.MAIN_HAND);
+                case 4 -> Skills.sync(p, true);
+                case 5 -> SuitArts.next(p);
                 default -> { }
             }
         });

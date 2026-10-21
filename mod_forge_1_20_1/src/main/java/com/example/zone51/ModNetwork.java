@@ -11,5 +11,8 @@ public class ModNetwork {
 
     public static void init() {
         CHANNEL.registerMessage(0, ActionPacket.class, ActionPacket::encode, ActionPacket::decode, ActionPacket::handle);
+        CHANNEL.registerMessage(2, SkillSyncPacket.class, SkillSyncPacket::encode, SkillSyncPacket::decode, SkillSyncPacket::handle);
+        CHANNEL.registerMessage(3, UpgradePacket.class, UpgradePacket::encode, UpgradePacket::decode, UpgradePacket::handle);
+        CHANNEL.registerMessage(1, EnergySyncPacket.class, EnergySyncPacket::encode, EnergySyncPacket::decode, EnergySyncPacket::handle);
     }
 }

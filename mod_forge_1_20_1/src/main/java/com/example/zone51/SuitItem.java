@@ -31,8 +31,6 @@ public class SuitItem extends ArmorItem {
 
     @Override
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-        if (suit == SuitType.ANCIENT || suit == SuitType.CARDSHARP) {
-            consumer.accept(SuitClient.create(suit));
-        }
+        consumer.accept(SuitClient.create(suit));
     }
 }

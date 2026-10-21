@@ -11,7 +11,7 @@ import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 /** Клиентская часть: подставляет 3D-модель брони для Древнего Человека и Карточника. */
 public final class SuitClient {
     public static IClientItemExtensions create(SuitType suit) {
-        final ModelLayerLocation layer = suit == SuitType.ANCIENT ? SuitModels.ANCIENT : SuitModels.CARDSHARP;
+        final ModelLayerLocation layer = SuitModels2.layerOf(suit);
         return new IClientItemExtensions() {
             private SuitArmorModel model;
 

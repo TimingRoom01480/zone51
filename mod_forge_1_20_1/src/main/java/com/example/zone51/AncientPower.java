@@ -20,7 +20,11 @@ public final class AncientPower {
     public static final int MAX = 100;
 
     public enum Ability {
-        FLIGHT(0), FIREBALL(10), SHIELD(20), STRIKE(10), STORM(40), TELEPORT(15), EXPLOSION(35), SWORD(25), HEAL(30);
+        FLIGHT(0), FIREBALL(10), SHIELD(20), TELEPORT(15), STRIKE(10),
+        STORM(40), EXPLOSION(35), SWORD(25), HEAL(30), BEAM(20),
+        SPEED(20), LEAP(10), SLAM(25), PHASE(30), NIGHT(10),
+        PULL(20), WAVE(15), FREEZE(25), STUN(25), CHAIN(30),
+        GUARDIAN(40), BERSERK(30), BARRAGE(35), METEOR(60), ABSORB(25);
         public final int cost;
         Ability(int cost) { this.cost = cost; }
         public Component label() { return Component.translatable("ability.zone51." + name().toLowerCase()); }
@@ -88,7 +92,7 @@ public final class AncientPower {
             return;
         }
         if (p.isShiftKeyDown()) {
-            if (p.getMainHandItem().is(ModItems.STONE_CORE.get())) { upgrade(p); return; }
+            if (p.getMainHandItem().is(ModItems.STONE_CORE.get())) { Skills.sync(p, true); return; }
             boolean off = !d.getBoolean(OFF);
             d.putBoolean(OFF, off);
             if (off) disableFlight(p);
@@ -98,6 +102,13 @@ public final class AncientPower {
         }
         d.putInt(CURSE, 0);
         setEnergy(p, MAX);
+        // заряжаем всё остальное: костюм, Сердце БОСС51 и лазерную пушку
+        ItemStack chest = Suits.chest(p);
+        if (chest.getItem() instanceof SuitItem si && si.suit.energy) Energy.add(chest, Suits.MAX_ENERGY, Suits.MAX_ENERGY);
+        for (ItemStack st : p.getInventory().items) {
+            if (st.getItem() instanceof Boss51HeartItem) Energy.add(st, Boss51HeartItem.MAX, Boss51HeartItem.MAX);
+            else if (st.getItem() instanceof LaserGunItem) Energy.add(st, LaserGunItem.MAX, LaserGunItem.MAX);
+        }
         msg(p, Component.translatable("message.zone51.altar_recharged"));
     }
 
@@ -105,7 +116,7 @@ public final class AncientPower {
     public static String branchOf(Ability a) {
         return switch (a) {
             case FLIGHT -> "flight";
-            case SHIELD, TELEPORT, HEAL -> "defense";
+            case SHIELD, TELEPORT, HEAL, SPEED, LEAP, PHASE, NIGHT, GUARDIAN, ABSORB -> "defense";
             default -> "attack";
         };
     }
@@ -165,11 +176,14 @@ public final class AncientPower {
         boolean staff = holdingStaff(p);
         if (a == Ability.FLIGHT) { toggleFlight(p); return; }
 
+        int lv = Skills.level(p, "ap_" + a.name().toLowerCase());
+        if (lv < 1) { msg(p, Component.translatable("message.zone51.skill_locked")); return; }
         int cost = staff ? Math.max(1, a.cost * 3 / 4) : a.cost;
+        cost = Math.max(1, (int) (cost * (1 - 0.06 * (lv - 1))));
         if (energy(p) < cost) { msg(p, Component.translatable("message.zone51.no_energy")); return; }
 
         Vec3 look = p.getLookAngle();
-        int atk = lvl(p, "attack"), def = lvl(p, "defense");
+        int atk = lv - 1, def = lv - 1;
         switch (a) {
             case FIREBALL -> Abilities.fireball(p, look, (staff ? 2 : 1) + (atk >= 2 ? 1 : 0));
             case SHIELD -> {
@@ -186,7 +200,7 @@ public final class AncientPower {
                 ItemHandlerHelper.giveItemToPlayer(p, s);
             }
             case HEAL -> p.heal(8f + 2f * def);
-            default -> { }
+            default -> AncientArts.cast(p, a, staff, atk, def);
         }
         setEnergy(p, energy(p) - cost);
 

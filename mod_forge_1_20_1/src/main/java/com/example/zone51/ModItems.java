@@ -14,9 +14,9 @@ public class ModItems {
     public static final DeferredRegister<Item> ITEMS =
             DeferredRegister.create(ForgeRegistries.ITEMS, Zone51.MODID);
 
-    public static final RegistryObject<Item> ENERGY_SHARD = simple("energy_shard", Rarity.COMMON);
+    public static final RegistryObject<Item> ENERGY_SHARD = ITEMS.register("energy_shard", () -> new EnergyItem(100, new Item.Properties()));
     public static final RegistryObject<Item> STONE_CORE = simple("stone_core", Rarity.RARE);
-    public static final RegistryObject<Item> LIGHTNING_CRYSTAL = simple("lightning_crystal", Rarity.RARE);
+    public static final RegistryObject<Item> LIGHTNING_CRYSTAL = ITEMS.register("lightning_crystal", () -> new EnergyItem(250, new Item.Properties().rarity(Rarity.RARE)));
     public static final RegistryObject<Item> BOSS51_CORE = simple("boss51_core", Rarity.EPIC);
     public static final RegistryObject<Item> ZONE51_KEYCARD = simple("zone51_keycard", Rarity.COMMON);
     public static final RegistryObject<Item> GOLD_COIN = simple("gold_coin", Rarity.COMMON);

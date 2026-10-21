@@ -14,6 +14,8 @@ public class ClientKeys {
     public static final KeyMapping NEXT = new KeyMapping("key.zone51.next_ability", GLFW.GLFW_KEY_H, CATEGORY);
     public static final KeyMapping USE = new KeyMapping("key.zone51.use_ability", GLFW.GLFW_KEY_R, CATEGORY);
     public static final KeyMapping SUIT = new KeyMapping("key.zone51.suit_ability", GLFW.GLFW_KEY_G, CATEGORY);
+    public static final KeyMapping SUIT_NEXT = new KeyMapping("key.zone51.suit_next", GLFW.GLFW_KEY_J, CATEGORY);
+    public static final KeyMapping TREE = new KeyMapping("key.zone51.open_tree", GLFW.GLFW_KEY_K, CATEGORY);
 
     @SubscribeEvent
     public static void onTick(TickEvent.ClientTickEvent e) {
@@ -21,6 +23,8 @@ public class ClientKeys {
         while (NEXT.consumeClick()) ModNetwork.CHANNEL.sendToServer(new ActionPacket(0));
         while (USE.consumeClick()) ModNetwork.CHANNEL.sendToServer(new ActionPacket(1));
         while (SUIT.consumeClick()) ModNetwork.CHANNEL.sendToServer(new ActionPacket(2));
+        while (SUIT_NEXT.consumeClick()) ModNetwork.CHANNEL.sendToServer(new ActionPacket(5));
+        while (TREE.consumeClick()) ModNetwork.CHANNEL.sendToServer(new ActionPacket(4));
     }
 
     /** ЛКМ в воздух с картой в руке: бросок (на сервер уходит пакет). */

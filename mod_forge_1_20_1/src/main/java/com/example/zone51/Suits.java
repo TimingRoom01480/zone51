@@ -119,23 +119,6 @@ public final class Suits {
 
     /** Клавиша X: способность надетого костюма. */
     public static void suitAbility(ServerPlayer p) {
-        long t = p.level().getGameTime();
-        if (t < p.getPersistentData().getLong(SUIT_CD)) return;
-        if (full(p, SuitType.CARDSHARP)) {
-            p.getPersistentData().putLong(VORTEX, t + 100);
-            p.getPersistentData().putLong(SUIT_CD, t + 600);
-        } else if (full(p, SuitType.EXO) && energy(p) >= 20) {
-            addEnergy(p, -20);
-            Vec3 d = p.getLookAngle();
-            p.setDeltaMovement(d.x * 0.8, 1.1, d.z * 0.8); // реактивный прыжок
-            p.hurtMarked = true;
-            p.getPersistentData().putLong(SUIT_CD, t + 20);
-        } else if (full(p, SuitType.ANCIENT) && energy(p) >= 25) {
-            addEnergy(p, -25);
-            Abilities.teleportDash(p, 8); // энергетический рывок
-            p.getPersistentData().putLong(SUIT_CD, t + 40);
-        } else {
-            p.displayClientMessage(Component.translatable("message.zone51.no_suit_ability"), true);
-        }
+        SuitArts.useSelected(p);
     }
 }
